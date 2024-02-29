@@ -1,0 +1,1 @@
+web gunicorn jcarlo.wsgi:application --log-file -
