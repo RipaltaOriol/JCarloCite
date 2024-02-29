@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: jcarlo
+      POSTGRES_PASSWORD: jcarlo
+      POSTGRES_DB: jcarlo
+    ports:
+      - "5432:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+
+volumes:
+  my_dbdata:
