@@ -39,7 +39,7 @@ jobs:
 
       - name: Run tests
         run: |
-		      python manage.py test
+          python manage.py test
         env:
           SQL_NAME: jcarlo
           SQL_USER: jcarlo
