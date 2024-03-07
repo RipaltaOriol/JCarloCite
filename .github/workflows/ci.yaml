@@ -1,0 +1,48 @@
+name: Quality Assurance
+
+on:
+  push:
+    branches:
+      - master
+      - staging
+  pull_request:
+    branches:
+      - master
+      - staging
+
+jobs:
+  quality-assurance:
+    name: Quality Assurance
+    runs-on: ubuntu-latest
+    container: python:3.9.18
+
+    services:
+      db:
+        image: postgres:14.1-alpine
+        env:
+          POSTGRES_DB: jcarlo
+          POSTGRES_USER: jcarlo
+          POSTGRES_PASSWORD: jcarlo
+        ports:
+          - 5432:5432
+
+          
+    steps:
+      - name: Check out repository code
+		    uses: actions/checkout@v4
+    
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+		      python manage.py test
+        env:
+          SQL_NAME: jcarlo
+          SQL_USER: jcarlo
+          SQL_PASSWORD: jcarlo
+          HOST: 127.0.0.1
+          PORT: 5432

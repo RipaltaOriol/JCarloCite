@@ -2,15 +2,16 @@ version: '3.9'
 
 services:
   db:
-    image: postgres
+    container_name: jcarlo-database
+    image: postgres:14.1-alpine
     environment:
-      POSTGRES_USER: jcarlo
-      POSTGRES_PASSWORD: jcarlo
-      POSTGRES_DB: jcarlo
+      POSTGRES_DB: ${SQL_NAME}
+      POSTGRES_USER: ${SQL_USER}
+      POSTGRES_PASSWORD: ${SQL_PASSWORD}
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
-      - my_dbdata:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
 volumes:
-  my_dbdata:
+  db:
